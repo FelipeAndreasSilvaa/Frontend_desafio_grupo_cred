@@ -1,192 +1,143 @@
 <p align="center">
-  <img src="https://nestjs.com/img/logo-small.svg" width="120" />
+  <img src="https://vitejs.dev/logo.svg" width="80" alt="Logo" />
 </p>
 
-<h1 align="center">API - Gestão de Usuários e Pedidos</h1>
+<h1 align="center">Frontend — Gestão de Usuários e Pedidos</h1>
 
 <p align="center">
-  API REST construída com NestJS para gerenciamento de usuários e pedidos com autenticação JWT.
+  Interface React para gerenciamento de usuários e pedidos, com integração via API REST.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/@nestjs/core.svg" />
-  <img src="https://img.shields.io/npm/l/@nestjs/core.svg" />
-  <img src="https://img.shields.io/npm/dm/@nestjs/common.svg" />
+  <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white" />
+  <img src="https://img.shields.io/badge/Axios-1.x-5A29E4?style=flat-square&logo=axios&logoColor=white" />
+  <img src="https://img.shields.io/badge/Jest-29-C21325?style=flat-square&logo=jest&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-MIT-22C55E?style=flat-square" />
 </p>
 
 ---
 
-# 🧠 Visão Geral
+## 📋 Visão Geral
 
-Sistema backend que permite:
+Interface web para gerenciamento de usuários e pedidos. Consome uma API REST com autenticação JWT e oferece:
 
-* Cadastro de usuários
-* Login com autenticação JWT
-* CRUD de usuários
-* CRUD de pedidos
-* Relacionamento entre usuários e pedidos
-* Proteção de rotas
+- Login e gerenciamento de sessão com JWT
+- CRUD de usuários
+- CRUD de pedidos
+- Navegação com rotas protegidas
 
 ---
 
-# 🛠️ Tecnologias
+## 🛠️ Tecnologias
 
-### 🔧 Backend
-
-* NestJS
-* Prisma ORM
-* PostgreSQL
-* JWT
-* Bcrypt
-
-### 🌐 Frontend
-
-* React
-* Axios
-* React Hook Form
+| Tecnologia | Uso |
+|---|---|
+| **React** | Biblioteca de UI |
+| **Axios** | Requisições HTTP |
+| **Jest** | Testes unitários |
 
 ---
 
-# ⚙️ Setup do Projeto
+## ⚙️ Setup
 
-## 📥 Clonar repositório
+### Pré-requisitos
+
+- Node.js 18+
+- npm ou yarn
+- API backend rodando em `http://localhost:3000`
+
+### Instalação
 
 ```bash
+# Clone o repositório
 git clone <URL_DO_REPOSITORIO>
-```
 
----
+# Acesse a pasta do projeto
+cd frontend
 
-## 📦 Backend
-
-```bash
-cd backend
+# Instale as dependências
 npm install
 ```
 
-### 🔐 Variáveis de ambiente
+### Variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/seubanco"
-JWT_SECRET="sua_chave_secreta"
+VITE_API_URL=http://localhost:3000
 ```
 
----
-
-## 🗄️ Banco de dados
+### Rodando o projeto
 
 ```bash
-npx prisma migrate dev
-```
-
----
-
-## ▶️ Rodar backend
-
-```bash
-npm run start:dev
-```
-
-📍 http://localhost:3000
-
----
-
-## 🌐 Frontend
-
-```bash
-cd ../frontend
-npm install
 npm run dev
 ```
 
-📍 http://localhost:8080
+Acesse em: [http://localhost:8080](http://localhost:8080)
 
 ---
 
-# 🔐 Autenticação
+## 🧪 Testes
 
-Fluxo:
+```bash
+# Rodar todos os testes
+npm run test
 
-```text
-Cadastro → Login → Token → Acesso protegido
+# Rodar em modo watch
+npm run test:watch
+
+# Ver cobertura
+npm run test:coverage
 ```
 
-Header:
+---
+
+## 📂 Estrutura
+
+```
+src/
+├── components/     # Componentes reutilizáveis
+├── pages/          # Páginas da aplicação
+├── hooks/          # Custom hooks
+└── service/        # Integração com a API (Axios)
+```
+
+---
+
+## 🔐 Autenticação
+
+O token JWT retornado pelo login é armazenado e enviado automaticamente no header de todas as requisições autenticadas:
 
 ```http
-Authorization: Bearer TOKEN
+Authorization: Bearer <TOKEN>
 ```
 
 ---
 
-# 📌 Endpoints
+## 🔗 Endpoints consumidos
 
-## 👤 Usuários
+### Usuários
 
-| Método | Rota       | Descrição    |
-| ------ | ---------- | ------------ |
-| POST   | /users     | Criar        |
-| GET    | /users     | Listar 🔒    |
-| GET    | /users/:id | Buscar 🔒    |
-| PATCH  | /users/:id | Atualizar 🔒 |
-| DELETE | /users/:id | Deletar 🔒   |
+| Método | Rota | Descrição | Auth |
+|---|---|---|---|
+| `POST` | `/users` | Criar usuário | — |
+| `GET` | `/users` | Listar usuários | ✅ |
+| `GET` | `/users/:id` | Buscar usuário | ✅ |
+| `PATCH` | `/users/:id` | Atualizar usuário | ✅ |
+| `DELETE` | `/users/:id` | Deletar usuário | ✅ |
 
----
+### Autenticação
 
-## 🔐 Auth
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | `/auth/login` | Login e geração de token |
 
-| Método | Rota        |
-| ------ | ----------- |
-| POST   | /auth/login |
+### Pedidos
 
----
-
-## 📦 Pedidos
-
-| Método | Rota            |
-| ------ | --------------- |
-| POST   | /order          |
-| GET    | /order          |
-| GET    | /order/user/:id |
-| PATCH  | /order/:id      |
-| DELETE | /order/:id      |
-
----
-
-# 🧪 Testes
-
-```bash
-npm run test
-npm run test:e2e
-```
-
----
-
-# 📂 Estrutura
-
-```bash
-backend/
- ├── src/
- │   ├── auth/
- │   ├── users/
- │   ├── order/
- │   ├── prisma/
- │   └── app.module.ts
-
-frontend/
- ├── src/
- │   ├── pages/
- │   ├── hooks/
- │   ├── service/
- │   └── components/
-```
-
----
-
-# ⚠️ Regras de Negócio
-
-* CPF e Email são únicos
-* Soft delete de usuários
-* Senhas criptografadas
-* Rotas protegidas com JWT
-
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | `/order` | Criar pedido |
+| `GET` | `/order` | Listar pedidos |
+| `GET` | `/order/user/:id` | Pedidos por usuário |
+| `PATCH` | `/order/:id` | Atualizar pedido |
+| `DELETE` | `/order/:id` | Deletar pedido |
