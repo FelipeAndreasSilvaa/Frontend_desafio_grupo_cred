@@ -1,55 +1,51 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/nestjs/nest/master/content/logo-small.svg" width="120" alt="NestJS Logo" />
-</p>
+# Frontend — Gestão de Usuários e Pedidos
 
-<h1 align="center">API - Gestão de Usuários e Pedidos</h1>
+![Logo](https://vitejs.dev/logo.svg)
 
-<p align="center">
-  API REST construída com NestJS para gerenciamento de usuários e pedidos com autenticação JWT.
-</p>
+Interface React para gerenciamento de usuários e pedidos, com integração via API REST.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/npm-v11.1.19-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" />
-  <img src="https://img.shields.io/badge/downloads-39M%2Fmonth-brightgreen?style=flat-square" />
-</p>
+![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-1.x-5A29E4?style=flat-square&logo=axios&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-29-C21325?style=flat-square&logo=jest&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-22C55E?style=flat-square)
 
 ---
 
-## 🧠 Visão Geral
+## 📋 Visão Geral
 
-Sistema backend que permite:
+Interface web para gerenciamento de usuários e pedidos. Consome uma API REST com autenticação JWT e oferece uma experiência fluida e segura.
 
-* **Cadastro** de usuários
-* **Login** com autenticação JWT
-* **CRUD** de usuários
-* **CRUD** de pedidos
-* **Relacionamento** entre usuários e pedidos
-* **Proteção** de rotas
+* **Login e Sessão:** Gerenciamento com JWT (JSON Web Token).
+* **CRUD Usuários:** Cadastro, listagem, edição e exclusão.
+* **CRUD Pedidos:** Gestão completa de ordens e histórico.
+* **Segurança:** Rotas protegidas que exigem autenticação.
 
 ---
 
 ## 🛠️ Tecnologias
 
-* **NestJS**
-* **Prisma ORM**
-* **PostgreSQL**
-* **JWT**
-* **Bcrypt**
-* **Jest**
+| Tecnologia | Uso |
+| :--- | :--- |
+| **React** | Biblioteca de UI |
+| **Axios** | Requisições HTTP |
+| **Jest** | Testes unitários |
 
 ---
 
 ## ⚙️ Setup
 
-### 1. Requisitos
-* Node.js e npm instalados.
-* Docker (opcional, para o banco de dados).
+### Pré-requisitos
+* Node.js 18+
+* npm ou yarn
+* API backend rodando em `http://localhost:3000`
 
-### 2. Instalação
+### Instalação
 ```bash
-# Instalar dependências
-npm install
+# Clone o repositório
+git clone <URL_DO_REPOSITORIO>
 
-# Configurar banco de dados (Prisma)
-npx prisma migrate dev
+# Acesse a pasta do projeto
+cd frontend
+
+# Instale as dependências
+npm install
