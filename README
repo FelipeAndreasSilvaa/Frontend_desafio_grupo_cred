@@ -1,0 +1,251 @@
+# 🚀 Projeto Fullstack - Gestão de Usuários e Pedidos
+
+Aplicação fullstack para gerenciamento de usuários e pedidos, com autenticação via JWT, backend em NestJS + Prisma e frontend em React.
+
+---
+
+# 🧠 Visão Geral
+
+O sistema permite:
+
+* Cadastro e autenticação de usuários
+* CRUD completo de usuários
+* Criação e listagem de pedidos vinculados a usuários
+* Proteção de rotas com JWT
+
+---
+
+# 🛠️ Tecnologias
+
+## Backend
+
+* NestJS
+* Prisma ORM
+* PostgreSQL
+* JWT (Autenticação)
+* Bcrypt (Hash de senha)
+
+## Frontend
+
+* React
+* Axios
+* React Hook Form
+
+---
+
+# ⚙️ Setup do Projeto
+
+## 📥 1. Clonar repositório
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+```
+
+---
+
+## 📦 2. Backend
+
+```bash
+cd backend
+npm install
+```
+
+### 🔐 Variáveis de ambiente
+
+Crie um `.env`:
+
+```env
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/seubanco"
+JWT_SECRET="sua_chave_secreta"
+```
+
+---
+
+## 🗄️ 3. Banco de dados
+
+```bash
+npx prisma migrate dev
+```
+
+---
+
+## ▶️ 4. Rodar backend
+
+```bash
+npm run start:dev
+```
+
+API disponível em:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🌐 5. Frontend
+
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+Frontend geralmente roda em:
+
+```
+http://localhost:8080
+```
+
+---
+
+# 🔐 Autenticação
+
+Fluxo:
+
+1. Criar usuário
+2. Fazer login
+3. Receber token JWT
+4. Enviar token nas rotas protegidas
+
+Header obrigatório:
+
+```http
+Authorization: Bearer TOKEN
+```
+
+---
+
+# 📌 Endpoints
+
+## 👤 Usuários
+
+### Criar usuário
+
+POST `/users`
+
+```json
+{
+  "nome": "João",
+  "idade": 25,
+  "email": "joao@email.com",
+  "senha": "123456",
+  "cpf": "12345678900",
+  "rg": "1234567"
+}
+```
+
+---
+
+### Listar usuários (🔒)
+
+GET `/users`
+
+---
+
+### Buscar por ID (🔒)
+
+GET `/users/:id`
+
+---
+
+### Atualizar (🔒)
+
+PATCH `/users/:id`
+
+---
+
+### Deletar (🔒)
+
+DELETE `/users/:id`
+
+---
+
+## 🔐 Auth
+
+### Login
+
+POST `/auth/login`
+
+```json
+{
+  "email": "joao@email.com",
+  "senha": "123456"
+}
+```
+
+---
+
+## 📦 Pedidos
+
+### Criar pedido (🔒)
+
+POST `/order`
+
+```json
+{
+  "descricao": "Mouse",
+  "userId": 1
+}
+```
+
+---
+
+### Listar pedidos (🔒)
+
+GET `/order`
+
+---
+
+### Por usuário (🔒)
+
+GET `/order/user/:id`
+
+---
+
+# 🧪 Testes
+
+```bash
+npm run test
+npm run test:e2e
+```
+
+---
+
+# 📂 Estrutura do Projeto
+
+```
+backend/
+ ├── src/
+ │   ├── auth/
+ │   ├── users/
+ │   ├── order/
+ │   ├── prisma/
+ │   └── app.module.ts
+ │
+ ├── test/
+ │   ├── auth.e2e-spec.ts
+ │   ├── users.e2e-spec.ts
+ │   ├── orders.e2e-spec.ts
+ │   └── app.e2e-spec.ts
+ │
+ └── prisma/
+     ├── schema.prisma
+     └── migrations/
+
+frontend/
+ ├── src/
+ │   ├── pages/
+ │   ├── hooks/
+ │   ├── service/
+ │   └── components/
+```
+
+---
+
+# ⚠️ Regras de Negócio
+
+* CPF e Email são únicos
+* Usuário não é deletado fisicamente (soft delete)
+* Senhas são criptografadas
+* Rotas protegidas exigem JWT
