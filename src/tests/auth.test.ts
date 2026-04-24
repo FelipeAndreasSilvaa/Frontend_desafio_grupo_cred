@@ -4,7 +4,7 @@ describe("Auth", () => {
   it("deve fazer login com sucesso", async () => {
     const res = await api.post("/auth/login", {
       email: "luisa@gmail.com",
-      senha: "Luisagostosa",
+      senha: "luisateste",
     });
 
     expect(res.data).toHaveProperty("access_token");
