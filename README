@@ -1,89 +1,117 @@
 <p align="center">
-  <img src="https://react.dev/images/og-home.png" width="120" />
+  <img src="https://nestjs.com/img/logo-small.svg" width="120" />
 </p>
 
-<h1 align="center">Frontend - Gestão de Usuários e Pedidos</h1>
+<h1 align="center">API - Gestão de Usuários e Pedidos</h1>
 
 <p align="center">
-  Interface web desenvolvida em React para consumo da API de usuários e pedidos com autenticação JWT.
+  API REST construída com NestJS para gerenciamento de usuários e pedidos com autenticação JWT.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18-blue" />
-  <img src="https://img.shields.io/badge/TypeScript-ready-blue" />
-  <img src="https://img.shields.io/badge/Status-Em%20desenvolvimento-green" />
+  <img src="https://img.shields.io/npm/v/@nestjs/core.svg" />
+  <img src="https://img.shields.io/npm/l/@nestjs/core.svg" />
+  <img src="https://img.shields.io/npm/dm/@nestjs/common.svg" />
 </p>
 
 ---
 
 # 🧠 Visão Geral
 
-Aplicação frontend responsável por:
+Sistema backend que permite:
 
-* 🔐 Autenticação de usuários
-* 📊 Dashboard do sistema
-* 👤 Gestão de usuários
-* 📦 Gestão de pedidos
-* 🔒 Proteção de rotas com JWT
-
----
-
-# ✨ Funcionalidades
-
+* Cadastro de usuários
 * Login com autenticação JWT
-* Listagem de usuários
-* Criação, edição e exclusão de usuários
-* Criação e listagem de pedidos
-* Filtro de pedidos por usuário
-* Redirecionamento automático sem login
+* CRUD de usuários
+* CRUD de pedidos
+* Relacionamento entre usuários e pedidos
+* Proteção de rotas
 
 ---
 
 # 🛠️ Tecnologias
 
+### 🔧 Backend
+
+* NestJS
+* Prisma ORM
+* PostgreSQL
+* JWT
+* Bcrypt
+
+### 🌐 Frontend
+
 * React
-* TypeScript
 * Axios
-* TanStack Router
-* TailwindCSS
+* React Hook Form
 
 ---
 
-# ⚙️ Como rodar o frontend
+# ⚙️ Setup do Projeto
 
-## 📥 Instalar dependências
+## 📥 Clonar repositório
 
 ```bash
+git clone <URL_DO_REPOSITORIO>
+```
+
+---
+
+## 📦 Backend
+
+```bash
+cd backend
 npm install
 ```
 
+### 🔐 Variáveis de ambiente
+
+```env
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/seubanco"
+JWT_SECRET="sua_chave_secreta"
+```
+
 ---
 
-## ▶️ Rodar aplicação
+## 🗄️ Banco de dados
 
 ```bash
+npx prisma migrate dev
+```
+
+---
+
+## ▶️ Rodar backend
+
+```bash
+npm run start:dev
+```
+
+📍 http://localhost:3000
+
+---
+
+## 🌐 Frontend
+
+```bash
+cd ../frontend
+npm install
 npm run dev
 ```
 
-📍 Aplicação disponível em:
-
-```
-http://localhost:8080
-```
+📍 http://localhost:8080
 
 ---
 
 # 🔐 Autenticação
 
-O frontend utiliza JWT salvo no navegador.
-
-### Fluxo:
+Fluxo:
 
 ```text
-Login → Token salvo no localStorage → Acesso liberado
+Cadastro → Login → Token → Acesso protegido
 ```
 
-### Header automático:
+Header:
 
 ```http
 Authorization: Bearer TOKEN
@@ -91,54 +119,74 @@ Authorization: Bearer TOKEN
 
 ---
 
-# 🔗 Integração com Backend
+# 📌 Endpoints
 
-Certifique-se que o backend está rodando:
+## 👤 Usuários
 
-```
-http://localhost:3000
-```
-
-E que o arquivo `api.ts` contém:
-
-```ts
-baseURL: "http://localhost:3000"
-```
+| Método | Rota       | Descrição    |
+| ------ | ---------- | ------------ |
+| POST   | /users     | Criar        |
+| GET    | /users     | Listar 🔒    |
+| GET    | /users/:id | Buscar 🔒    |
+| PATCH  | /users/:id | Atualizar 🔒 |
+| DELETE | /users/:id | Deletar 🔒   |
 
 ---
 
-# 📂 Estrutura do Projeto
+## 🔐 Auth
+
+| Método | Rota        |
+| ------ | ----------- |
+| POST   | /auth/login |
+
+---
+
+## 📦 Pedidos
+
+| Método | Rota            |
+| ------ | --------------- |
+| POST   | /order          |
+| GET    | /order          |
+| GET    | /order/user/:id |
+| PATCH  | /order/:id      |
+| DELETE | /order/:id      |
+
+---
+
+# 🧪 Testes
 
 ```bash
-src/
- ├── pages/
- │   ├── LoginPage.tsx
- │   ├── UsersPage.tsx
- │   ├── OrdersPage.tsx
- │   └── Edit pages
- │
- ├── hooks/
- │   ├── useUsers.ts
- │   └── useOrder.ts
- │
- ├── service/
- │   ├── api.ts
- │   ├── users.ts
- │   └── orders.ts
- │
- ├── components/
- │   ├── Button.tsx
- │   ├── Input.tsx
- │   ├── Table.tsx
- │   └── Layout
+npm run test
+npm run test:e2e
 ```
 
 ---
 
-# 🧠 Regras do Frontend
+# 📂 Estrutura
 
-* Usuário precisa estar logado para acessar rotas
-* Token é salvo no `localStorage`
-* Interceptor adiciona token automaticamente nas requisições
-* Redirecionamento automático para login se não autenticado
+```bash
+backend/
+ ├── src/
+ │   ├── auth/
+ │   ├── users/
+ │   ├── order/
+ │   ├── prisma/
+ │   └── app.module.ts
+
+frontend/
+ ├── src/
+ │   ├── pages/
+ │   ├── hooks/
+ │   ├── service/
+ │   └── components/
+```
+
+---
+
+# ⚠️ Regras de Negócio
+
+* CPF e Email são únicos
+* Soft delete de usuários
+* Senhas criptografadas
+* Rotas protegidas com JWT
 
