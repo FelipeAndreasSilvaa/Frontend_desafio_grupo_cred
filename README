@@ -1,37 +1,31 @@
-<p align="center">
-  <img src="https://vitejs.dev/logo.svg" width="80" alt="Logo" />
-</p>
+# Frontend — Gestão de Usuários e Pedidos
 
-<h1 align="center">Frontend — Gestão de Usuários e Pedidos</h1>
+![Logo](https://vitejs.dev/logo.svg)
 
-<p align="center">
-  Interface React para gerenciamento de usuários e pedidos, com integração via API REST.
-</p>
+Interface React para gerenciamento de usuários e pedidos, com integração via API REST.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white" />
-  <img src="https://img.shields.io/badge/Axios-1.x-5A29E4?style=flat-square&logo=axios&logoColor=white" />
-  <img src="https://img.shields.io/badge/Jest-29-C21325?style=flat-square&logo=jest&logoColor=white" />
-  <img src="https://img.shields.io/badge/License-MIT-22C55E?style=flat-square" />
-</p>
+![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-1.x-5A29E4?style=flat-square&logo=axios&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-29-C21325?style=flat-square&logo=jest&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-22C55E?style=flat-square)
 
 ---
 
 ## 📋 Visão Geral
 
-Interface web para gerenciamento de usuários e pedidos. Consome uma API REST com autenticação JWT e oferece:
+Interface web para gerenciamento de usuários e pedidos. Consome uma API REST com autenticação JWT e oferece uma experiência fluida e segura.
 
-- Login e gerenciamento de sessão com JWT
-- CRUD de usuários
-- CRUD de pedidos
-- Navegação com rotas protegidas
+* **Login e Sessão:** Gerenciamento com JWT (JSON Web Token).
+* **CRUD Usuários:** Cadastro, listagem, edição e exclusão.
+* **CRUD Pedidos:** Gestão completa de ordens e histórico.
+* **Segurança:** Rotas protegidas que exigem autenticação.
 
 ---
 
 ## 🛠️ Tecnologias
 
 | Tecnologia | Uso |
-|---|---|
+| :--- | :--- |
 | **React** | Biblioteca de UI |
 | **Axios** | Requisições HTTP |
 | **Jest** | Testes unitários |
@@ -41,13 +35,11 @@ Interface web para gerenciamento de usuários e pedidos. Consome uma API REST co
 ## ⚙️ Setup
 
 ### Pré-requisitos
-
-- Node.js 18+
-- npm ou yarn
-- API backend rodando em `http://localhost:3000`
+* Node.js 18+
+* npm ou yarn
+* API backend rodando em `http://localhost:3000`
 
 ### Instalação
-
 ```bash
 # Clone o repositório
 git clone <URL_DO_REPOSITORIO>
@@ -57,87 +49,3 @@ cd frontend
 
 # Instale as dependências
 npm install
-```
-
-### Variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto:
-
-```env
-VITE_API_URL=http://localhost:3000
-```
-
-### Rodando o projeto
-
-```bash
-npm run dev
-```
-
-Acesse em: [http://localhost:8080](http://localhost:8080)
-
----
-
-## 🧪 Testes
-
-```bash
-# Rodar todos os testes
-npm run test
-
-# Rodar em modo watch
-npm run test:watch
-
-# Ver cobertura
-npm run test:coverage
-```
-
----
-
-## 📂 Estrutura
-
-```
-src/
-├── components/     # Componentes reutilizáveis
-├── pages/          # Páginas da aplicação
-├── hooks/          # Custom hooks
-└── service/        # Integração com a API (Axios)
-```
-
----
-
-## 🔐 Autenticação
-
-O token JWT retornado pelo login é armazenado e enviado automaticamente no header de todas as requisições autenticadas:
-
-```http
-Authorization: Bearer <TOKEN>
-```
-
----
-
-## 🔗 Endpoints consumidos
-
-### Usuários
-
-| Método | Rota | Descrição | Auth |
-|---|---|---|---|
-| `POST` | `/users` | Criar usuário | — |
-| `GET` | `/users` | Listar usuários | ✅ |
-| `GET` | `/users/:id` | Buscar usuário | ✅ |
-| `PATCH` | `/users/:id` | Atualizar usuário | ✅ |
-| `DELETE` | `/users/:id` | Deletar usuário | ✅ |
-
-### Autenticação
-
-| Método | Rota | Descrição |
-|---|---|---|
-| `POST` | `/auth/login` | Login e geração de token |
-
-### Pedidos
-
-| Método | Rota | Descrição |
-|---|---|---|
-| `POST` | `/order` | Criar pedido |
-| `GET` | `/order` | Listar pedidos |
-| `GET` | `/order/user/:id` | Pedidos por usuário |
-| `PATCH` | `/order/:id` | Atualizar pedido |
-| `DELETE` | `/order/:id` | Deletar pedido |
