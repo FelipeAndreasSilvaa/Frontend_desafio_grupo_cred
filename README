@@ -1,31 +1,39 @@
-# 🚀 Projeto Fullstack - Gestão de Usuários e Pedidos
-
-Aplicação fullstack para gerenciamento de usuários e pedidos, com autenticação via JWT, backend em NestJS + Prisma e frontend em React.
-
----
-
-# 🧠 Visão Geral
-
-O sistema permite:
-
-* Cadastro e autenticação de usuários
-* CRUD completo de usuários
-* Criação e listagem de pedidos vinculados a usuários
-* Proteção de rotas com JWT
+<p align="center">
+  <h1 align="center">🚀 Projeto Fullstack</h1>
+  <p align="center">
+    <strong>Gestão de Usuários e Pedidos</strong>
+  </p>
+  <p align="center">
+    Aplicação fullstack com autenticação JWT utilizando NestJS, Prisma e React
+  </p>
+</p>
 
 ---
 
-# 🛠️ Tecnologias
+# 🧠 Sobre o Projeto
 
-## Backend
+Sistema completo para gerenciamento de usuários e pedidos com autenticação segura e arquitetura moderna.
+
+### ✨ Funcionalidades
+
+* 🔐 Autenticação com JWT
+* 👤 CRUD completo de usuários
+* 📦 Gestão de pedidos vinculados a usuários
+* 🛡️ Proteção de rotas no frontend e backend
+
+---
+
+# 🛠️ Tecnologias Utilizadas
+
+### 🔧 Backend
 
 * NestJS
 * Prisma ORM
 * PostgreSQL
-* JWT (Autenticação)
-* Bcrypt (Hash de senha)
+* JWT
+* Bcrypt
 
-## Frontend
+### 🌐 Frontend
 
 * React
 * Axios
@@ -33,7 +41,7 @@ O sistema permite:
 
 ---
 
-# ⚙️ Setup do Projeto
+# ⚙️ Como rodar o projeto
 
 ## 📥 1. Clonar repositório
 
@@ -52,7 +60,7 @@ npm install
 
 ### 🔐 Variáveis de ambiente
 
-Crie um `.env`:
+Crie um arquivo `.env`:
 
 ```env
 DATABASE_URL="postgresql://usuario:senha@localhost:5432/seubanco"
@@ -75,7 +83,7 @@ npx prisma migrate dev
 npm run start:dev
 ```
 
-API disponível em:
+📍 API disponível em:
 
 ```
 http://localhost:3000
@@ -91,7 +99,7 @@ npm install
 npm run dev
 ```
 
-Frontend geralmente roda em:
+📍 Frontend:
 
 ```
 http://localhost:8080
@@ -101,14 +109,13 @@ http://localhost:8080
 
 # 🔐 Autenticação
 
-Fluxo:
+### 📌 Fluxo
 
-1. Criar usuário
-2. Fazer login
-3. Receber token JWT
-4. Enviar token nas rotas protegidas
+```text
+Cadastro → Login → Token JWT → Acesso às rotas protegidas
+```
 
-Header obrigatório:
+### 📡 Header obrigatório
 
 ```http
 Authorization: Bearer TOKEN
@@ -116,13 +123,19 @@ Authorization: Bearer TOKEN
 
 ---
 
-# 📌 Endpoints
+# 📌 Endpoints da API
 
 ## 👤 Usuários
 
-### Criar usuário
+| Método | Rota         | Descrição          |
+| ------ | ------------ | ------------------ |
+| POST   | `/users`     | Criar usuário      |
+| GET    | `/users`     | Listar usuários 🔒 |
+| GET    | `/users/:id` | Buscar por ID 🔒   |
+| PATCH  | `/users/:id` | Atualizar 🔒       |
+| DELETE | `/users/:id` | Deletar 🔒         |
 
-POST `/users`
+### Exemplo:
 
 ```json
 {
@@ -137,35 +150,11 @@ POST `/users`
 
 ---
 
-### Listar usuários (🔒)
-
-GET `/users`
-
----
-
-### Buscar por ID (🔒)
-
-GET `/users/:id`
-
----
-
-### Atualizar (🔒)
-
-PATCH `/users/:id`
-
----
-
-### Deletar (🔒)
-
-DELETE `/users/:id`
-
----
-
 ## 🔐 Auth
 
-### Login
-
-POST `/auth/login`
+| Método | Rota          | Descrição |
+| ------ | ------------- | --------- |
+| POST   | `/auth/login` | Login     |
 
 ```json
 {
@@ -178,9 +167,11 @@ POST `/auth/login`
 
 ## 📦 Pedidos
 
-### Criar pedido (🔒)
-
-POST `/order`
+| Método | Rota              | Descrição         |
+| ------ | ----------------- | ----------------- |
+| POST   | `/order`          | Criar pedido 🔒   |
+| GET    | `/order`          | Listar pedidos 🔒 |
+| GET    | `/order/user/:id` | Por usuário 🔒    |
 
 ```json
 {
@@ -188,18 +179,6 @@ POST `/order`
   "userId": 1
 }
 ```
-
----
-
-### Listar pedidos (🔒)
-
-GET `/order`
-
----
-
-### Por usuário (🔒)
-
-GET `/order/user/:id`
 
 ---
 
@@ -214,7 +193,7 @@ npm run test:e2e
 
 # 📂 Estrutura do Projeto
 
-```
+```bash
 backend/
  ├── src/
  │   ├── auth/
@@ -246,6 +225,6 @@ frontend/
 # ⚠️ Regras de Negócio
 
 * CPF e Email são únicos
-* Usuário não é deletado fisicamente (soft delete)
+* Usuário utiliza **soft delete**
 * Senhas são criptografadas
-* Rotas protegidas exigem JWT
+* Rotas protegidas exigem autenticação JWT
